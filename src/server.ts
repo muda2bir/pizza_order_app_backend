@@ -1,12 +1,12 @@
-if (process.env.NODE_ENV !== "production") require("dotenv").config(); // * This is only going to import environment variables in the development
 import express from "express";
+const app = express();
+if (app.get("env") !== "production") require("dotenv").config(); // * This is only going to import environment variables in the development
 import passport from "passport";
 import cors from "cors";
 import { v4 as uuid } from "uuid";
 import session from "express-session";
 import "./strategies/local"; // * Local Authentication Strategy
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const app = express();
 import { db_connect } from "./utils/db_connect";
 db_connect(); // Checking database connection.
 import { sequelize } from "./sequelize";
@@ -14,7 +14,7 @@ sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing
 // routes of the application
 import { router as userRoutes } from "./routes/user";
 
-if (process.env.NODE_ENV === "production") app.set("trust proxy", 1);
+if (app.get("env") === "production") app.set("trust proxy", 1);
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -41,8 +41,7 @@ app.use(
     store: sessionStore,
     proxy: true,
     cookie: {
-      sameSite: "none",
-      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })

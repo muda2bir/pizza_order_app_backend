@@ -14,25 +14,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = require("express");
+const passport_1 = __importDefault(require("passport"));
 const uuid_1 = require("uuid");
 const user_auth_1 = __importDefault(require("../middleware/user-auth"));
 const users_1 = require("../sequelize/models/users");
 const hashing_1 = require("../utils/hashing");
 exports.router = (0, express_1.Router)();
-const passport_1 = __importDefault(require("passport"));
 exports.router.get("/", user_auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.session);
     const allUsers = yield users_1.User.findAll();
     res.send(allUsers);
 }));
-// * Authenticating a User
+// * Logging In the User /api/v1/users/login
 exports.router.post("/login", passport_1.default.authenticate("local"), (req, res) => {
-    return res.json({
-        status: "ok",
-        message: "User Logged In Successfully!",
-        user: req.user,
-    });
+    if (req.user) {
+        return res.json({
+            status: "ok",
+            message: "Logged In Successfully!",
+            userId: req.user,
+        });
+    }
 });
+// * Registering In the User /api/v1/users/register
 exports.router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { full_name, email, password } = req.body; // destructuring the details from the the body;
@@ -62,7 +65,7 @@ exports.router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0,
         return res.json({
             status: "ok",
             message: "User Registered Successfully!",
-            // userId: user.toJSON()._id,
+            userId: user.toJSON()._id,
         });
     }
     catch (error) {

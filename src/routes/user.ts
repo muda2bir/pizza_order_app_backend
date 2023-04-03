@@ -1,10 +1,10 @@
 import { Router } from "express";
+import passport from "passport";
 import { v4 as uuid } from "uuid";
 import isUserAuthenticated from "../middleware/user-auth";
 import { User } from "../sequelize/models/users";
 import { hashPassword } from "../utils/hashing";
 export const router = Router();
-import passport from "passport";
 
 router.get("/", isUserAuthenticated, async (req, res) => {
   console.log(req.session);
@@ -12,15 +12,18 @@ router.get("/", isUserAuthenticated, async (req, res) => {
   res.send(allUsers);
 });
 
-// * Authenticating a User
+// * Logging In the User /api/v1/users/login
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  return res.json({
-    status: "ok",
-    message: "User Logged In Successfully!",
-    user: req.user,
-  });
+  if (req.user) {
+    return res.json({
+      status: "ok",
+      message: "Logged In Successfully!",
+      userId: req.user,
+    });
+  }
 });
 
+// * Registering In the User /api/v1/users/register
 router.post("/register", async (req, res) => {
   try {
     const { full_name, email, password } = req.body; // destructuring the details from the the body;
@@ -54,7 +57,7 @@ router.post("/register", async (req, res) => {
     return res.json({
       status: "ok",
       message: "User Registered Successfully!",
-      // userId: user.toJSON()._id,
+      userId: user.toJSON()._id,
     });
   } catch (error) {
     return res.json({

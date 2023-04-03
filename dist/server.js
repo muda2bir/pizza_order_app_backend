@@ -3,23 +3,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-if (process.env.NODE_ENV !== "production")
-    require("dotenv").config(); // * This is only going to import environment variables in the development
 const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
+if (app.get("env") !== "production")
+    require("dotenv").config(); // * This is only going to import environment variables in the development
 const passport_1 = __importDefault(require("passport"));
 const cors_1 = __importDefault(require("cors"));
 const uuid_1 = require("uuid");
 const express_session_1 = __importDefault(require("express-session"));
 require("./strategies/local"); // * Local Authentication Strategy
 const SequelizeStore = require("connect-session-sequelize")(express_session_1.default.Store);
-const app = (0, express_1.default)();
 const db_connect_1 = require("./utils/db_connect");
 (0, db_connect_1.db_connect)(); // Checking database connection.
 const sequelize_1 = require("./sequelize");
 sequelize_1.sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing all the tables with the database;
 // routes of the application
 const user_1 = require("./routes/user");
-if (process.env.NODE_ENV === "production")
+if (app.get("env") === "production")
     app.set("trust proxy", 1);
 app.use((0, cors_1.default)({
     origin: process.env.CORS_ORIGIN,
@@ -43,8 +43,7 @@ app.use((0, express_session_1.default)({
     store: sessionStore,
     proxy: true,
     cookie: {
-        sameSite: "none",
-        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
     },
 })); // * This is the session middleware
