@@ -19,6 +19,7 @@ const sequelize_1 = require("./sequelize");
 sequelize_1.sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing all the tables with the database;
 // routes of the application
 const user_1 = require("./routes/user");
+const ingredients_1 = require("./routes/ingredients");
 if (app.get("env") === "production")
     app.set("trust proxy", 1);
 app.use((0, cors_1.default)({
@@ -55,5 +56,6 @@ app.get("/", (req, res) => {
     res.json({ message: "Index page!" });
 });
 app.use("/api/v1/users", user_1.router); // user route
+app.use("/api/v1/ingredients", ingredients_1.router); // ingredients route
 const PORT = process.env.PORT || 5174;
 app.listen(PORT);

@@ -13,6 +13,7 @@ import { sequelize } from "./sequelize";
 sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing all the tables with the database;
 // routes of the application
 import { router as userRoutes } from "./routes/user";
+import { router as ingredientsRouter } from "./routes/ingredients";
 
 if (app.get("env") === "production") app.set("trust proxy", 1);
 app.use(
@@ -58,6 +59,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/users", userRoutes); // user route
+app.use("/api/v1/ingredients", ingredientsRouter); // ingredients route
 
 const PORT = process.env.PORT || 5174;
 app.listen(PORT);
