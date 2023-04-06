@@ -14,6 +14,10 @@ exports.Ingredients = index_1.sequelize.define("ingredients", {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
+    price: {
+        type: sequelize_1.DataTypes.FLOAT,
+        allowNull: false,
+    },
 }, {
     timestamps: false,
 });

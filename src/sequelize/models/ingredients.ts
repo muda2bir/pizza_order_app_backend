@@ -14,6 +14,10 @@ export const Ingredients = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,

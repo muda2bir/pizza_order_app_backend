@@ -31,7 +31,7 @@ exports.router.post("/login", passport_1.default.authenticate("local"), (req, re
         return res.json({
             status: "ok",
             message: "Logged In Successfully!",
-            userId: req.user,
+            user: req.user,
         });
     }
 });
