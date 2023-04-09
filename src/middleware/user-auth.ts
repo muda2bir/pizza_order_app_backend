@@ -7,6 +7,8 @@ export default function isUserAuthenticated(
 ) {
   if (req.user) next();
   else {
-    res.status(401).json({ status: "error", message: "Unauthorized!" });
+    res
+      .status(401)
+      .json({ status: "error", message: "Please Login to continue!" });
   }
 }

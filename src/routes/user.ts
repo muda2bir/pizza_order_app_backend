@@ -1,16 +1,11 @@
 import { Router } from "express";
 import passport from "passport";
 import { v4 as uuid } from "uuid";
-import isUserAuthenticated from "../middleware/user-auth";
 import { User } from "../sequelize/models/users";
 import { hashPassword } from "../utils/hashing";
+import isUserAuthenticated from "../middleware/user-auth";
 export const router = Router();
-
-router.get("/", isUserAuthenticated, async (req, res) => {
-  console.log(req.session);
-  const allUsers = await User.findAll();
-  res.send(allUsers);
-});
+import { Cart } from "../sequelize/models/cart";
 
 // * Logging In the User /api/v1/users/login
 router.post("/login", passport.authenticate("local"), (req, res) => {
@@ -64,6 +59,16 @@ router.post("/register", async (req, res) => {
       status: "error",
       message: "Something went wrong!",
       error: error,
+    });
+  }
+});
+
+router.get("/get_user", isUserAuthenticated, async (req, res) => {
+  if (req.user) {
+    return res.json({
+      status: "ok",
+      message: "User is logged in",
+      user: req.user,
     });
   }
 });

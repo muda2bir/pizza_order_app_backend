@@ -5,7 +5,7 @@ export const User = sequelize.define(
   "users",
   {
     _id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },

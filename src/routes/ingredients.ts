@@ -1,9 +1,8 @@
-import { Router, Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import { Ingredients } from "../sequelize/models/ingredients";
-import isUserAuthenticated from "../middleware/user-auth";
 export const router = Router();
 
-router.get("/", isUserAuthenticated, async (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const allIngredients = await Ingredients.findAll();
     if (req.user) {
@@ -12,6 +11,12 @@ router.get("/", isUserAuthenticated, async (req: Request, res: Response) => {
         message: "Ingredients fetched successfully",
         ingredients: allIngredients,
         user: req.user,
+      });
+    } else {
+      return res.json({
+        status: "error",
+        message: "User not logged in",
+        ingredients: allIngredients,
       });
     }
   } catch (err) {

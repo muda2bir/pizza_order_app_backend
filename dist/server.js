@@ -20,6 +20,7 @@ sequelize_1.sequelize.sync({ alter: true }).catch((err) => console.error(err)); 
 // routes of the application
 const user_1 = require("./routes/user");
 const ingredients_1 = require("./routes/ingredients");
+const cart_1 = require("./routes/cart");
 if (app.get("env") === "production")
     app.set("trust proxy", 1);
 app.use((0, cors_1.default)({
@@ -57,5 +58,6 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/users", user_1.router); // user route
 app.use("/api/v1/ingredients", ingredients_1.router); // ingredients route
+app.use("/api/v1/cart", cart_1.router); // cart route
 const PORT = process.env.PORT || 5174;
 app.listen(PORT);

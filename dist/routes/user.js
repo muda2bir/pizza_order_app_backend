@@ -16,15 +16,10 @@ exports.router = void 0;
 const express_1 = require("express");
 const passport_1 = __importDefault(require("passport"));
 const uuid_1 = require("uuid");
-const user_auth_1 = __importDefault(require("../middleware/user-auth"));
 const users_1 = require("../sequelize/models/users");
 const hashing_1 = require("../utils/hashing");
+const user_auth_1 = __importDefault(require("../middleware/user-auth"));
 exports.router = (0, express_1.Router)();
-exports.router.get("/", user_auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.session);
-    const allUsers = yield users_1.User.findAll();
-    res.send(allUsers);
-}));
 // * Logging In the User /api/v1/users/login
 exports.router.post("/login", passport_1.default.authenticate("local"), (req, res) => {
     if (req.user) {
@@ -73,6 +68,15 @@ exports.router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0,
             status: "error",
             message: "Something went wrong!",
             error: error,
+        });
+    }
+}));
+exports.router.get("/get_user", user_auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (req.user) {
+        return res.json({
+            status: "ok",
+            message: "User is logged in",
+            user: req.user,
         });
     }
 }));

@@ -5,7 +5,7 @@ const sequelize_1 = require("sequelize");
 const index_1 = require("../index");
 exports.User = index_1.sequelize.define("users", {
     _id: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true,
     },

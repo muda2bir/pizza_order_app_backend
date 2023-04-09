@@ -8,16 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = require("express");
 const ingredients_1 = require("../sequelize/models/ingredients");
-const user_auth_1 = __importDefault(require("../middleware/user-auth"));
 exports.router = (0, express_1.Router)();
-exports.router.get("/", user_auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allIngredients = yield ingredients_1.Ingredients.findAll();
         if (req.user) {
@@ -26,6 +22,13 @@ exports.router.get("/", user_auth_1.default, (req, res) => __awaiter(void 0, voi
                 message: "Ingredients fetched successfully",
                 ingredients: allIngredients,
                 user: req.user,
+            });
+        }
+        else {
+            return res.json({
+                status: "error",
+                message: "User not logged in",
+                ingredients: allIngredients,
             });
         }
     }
