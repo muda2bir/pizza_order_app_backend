@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-if (app.get("env") !== "production") require("dotenv").config(); // * This is only going to import environment variables in the development
+if (process.env.NODE_ENV !== "production") require("dotenv").config(); // * This is only going to import environment variables in the development
 import passport from "passport";
 import cors from "cors";
 import { v4 as uuid } from "uuid";
@@ -17,7 +17,7 @@ import { router as ingredientsRouter } from "./routes/ingredients";
 import { router as cartRouter } from "./routes/cart";
 import { router as orderRouter } from "./routes/order";
 
-if (app.get("env") === "production") app.set("trust proxy", 1);
+if (process.env.NODE_ENV === "production") app.set("trust proxy", 1);
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,

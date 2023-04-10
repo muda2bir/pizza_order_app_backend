@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
-if (app.get("env") !== "production")
+if (process.env.NODE_ENV !== "production")
     require("dotenv").config(); // * This is only going to import environment variables in the development
 const passport_1 = __importDefault(require("passport"));
 const cors_1 = __importDefault(require("cors"));
@@ -22,7 +22,7 @@ const user_1 = require("./routes/user");
 const ingredients_1 = require("./routes/ingredients");
 const cart_1 = require("./routes/cart");
 const order_1 = require("./routes/order");
-if (app.get("env") === "production")
+if (process.env.NODE_ENV === "production")
     app.set("trust proxy", 1);
 app.use((0, cors_1.default)({
     origin: process.env.CORS_ORIGIN,
