@@ -42,8 +42,8 @@ exports.router.get("/get_user_cart", user_auth_1.default, (req, res) => __awaite
 // Pushing an item into the cart
 exports.router.post("/push_to_cart", user_auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { pizza_name, customer_id, ingredients } = req.body;
-        if (!pizza_name || !customer_id || !ingredients) {
+        const { pizza_name, customer_id, ingredients, total_price } = req.body;
+        if (!pizza_name || !customer_id || !ingredients || !total_price) {
             return res.json({
                 status: "error",
                 message: "Please send all the details!",
@@ -54,6 +54,7 @@ exports.router.post("/push_to_cart", user_auth_1.default, (req, res) => __awaite
             pizza_name: pizza_name,
             customer_id: customer_id,
             ingredients: ingredients,
+            total_price: total_price,
         });
         return res.json({
             status: "ok",

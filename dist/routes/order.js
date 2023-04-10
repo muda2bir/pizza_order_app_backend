@@ -37,6 +37,7 @@ exports.router.post("/make_order", user_auth_1.default, (req, res) => __awaiter(
                 pizza_name: allCarts[i].dataValues.pizza_name,
                 customer_id: customer_id,
                 ingredients: allCarts[i].dataValues.ingredients,
+                total_price: allCarts[i].dataValues.total_price,
             });
         }
         const deletingCart = yield cart_1.Cart.destroy({

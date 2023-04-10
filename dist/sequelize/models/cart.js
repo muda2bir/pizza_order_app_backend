@@ -26,6 +26,10 @@ exports.Cart = index_1.sequelize.define("cart", {
         type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
         allowNull: false,
     },
+    total_price: {
+        type: sequelize_1.DataTypes.FLOAT,
+        allowNull: false,
+    },
 }, {
     timestamps: false,
 });

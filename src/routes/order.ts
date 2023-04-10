@@ -25,6 +25,7 @@ router.post("/make_order", isUserAuthenticated, async (req, res) => {
         pizza_name: allCarts[i].dataValues.pizza_name,
         customer_id: customer_id,
         ingredients: allCarts[i].dataValues.ingredients,
+        total_price: allCarts[i].dataValues.total_price,
       });
     }
 

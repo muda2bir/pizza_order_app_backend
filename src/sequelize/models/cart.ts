@@ -26,6 +26,10 @@ export const Cart = sequelize.define(
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
+    total_price: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,

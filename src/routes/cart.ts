@@ -36,8 +36,8 @@ router.get("/get_user_cart", isUserAuthenticated, async (req, res) => {
 // Pushing an item into the cart
 router.post("/push_to_cart", isUserAuthenticated, async (req, res) => {
   try {
-    const { pizza_name, customer_id, ingredients } = req.body;
-    if (!pizza_name || !customer_id || !ingredients) {
+    const { pizza_name, customer_id, ingredients, total_price } = req.body;
+    if (!pizza_name || !customer_id || !ingredients || !total_price) {
       return res.json({
         status: "error",
         message: "Please send all the details!",
@@ -49,6 +49,7 @@ router.post("/push_to_cart", isUserAuthenticated, async (req, res) => {
       pizza_name: pizza_name,
       customer_id: customer_id,
       ingredients: ingredients,
+      total_price: total_price,
     });
 
     return res.json({

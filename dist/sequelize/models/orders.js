@@ -26,6 +26,10 @@ exports.Orders = index_1.sequelize.define("orders", {
         type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
         allowNull: false,
     },
+    total_price: {
+        type: sequelize_1.DataTypes.FLOAT,
+        allowNull: false,
+    },
 }, {
     createdAt: "orderedAt",
 });
