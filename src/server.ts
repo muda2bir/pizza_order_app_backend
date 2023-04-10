@@ -15,6 +15,7 @@ sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing
 import { router as userRoutes } from "./routes/user";
 import { router as ingredientsRouter } from "./routes/ingredients";
 import { router as cartRouter } from "./routes/cart";
+import { router as orderRouter } from "./routes/order";
 
 if (app.get("env") === "production") app.set("trust proxy", 1);
 app.use(
@@ -62,6 +63,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/users", userRoutes); // user route
 app.use("/api/v1/ingredients", ingredientsRouter); // ingredients route
 app.use("/api/v1/cart", cartRouter); // cart route
+app.use("/api/v1/order", orderRouter); // order route
 
 const PORT = process.env.PORT || 5174;
 app.listen(PORT);

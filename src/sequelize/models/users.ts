@@ -5,7 +5,8 @@ export const User = sequelize.define(
   "users",
   {
     _id: {
-      type: DataTypes.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },

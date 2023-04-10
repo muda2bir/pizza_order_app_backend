@@ -69,3 +69,20 @@ exports.router.post("/push_to_cart", user_auth_1.default, (req, res) => __awaite
         });
     }
 }));
+exports.router.delete("/remove_from_cart", user_auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cart_id } = req.body;
+        const deletingCart = yield cart_1.Cart.destroy({ where: { cart_id: cart_id } });
+        return res.json({
+            status: "ok",
+            message: "Cart deleted successfully!",
+        });
+    }
+    catch (err) {
+        return res.json({
+            status: "error",
+            message: "Something went wrong!",
+            error: err,
+        });
+    }
+}));

@@ -5,7 +5,8 @@ export const Cart = sequelize.define(
   "cart",
   {
     cart_id: {
-      type: DataTypes.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },
@@ -22,7 +23,7 @@ export const Cart = sequelize.define(
       },
     },
     ingredients: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
   },

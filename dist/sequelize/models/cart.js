@@ -5,7 +5,8 @@ const sequelize_1 = require("sequelize");
 const index_1 = require("../index");
 exports.Cart = index_1.sequelize.define("cart", {
     cart_id: {
-        type: sequelize_1.DataTypes.UUIDV4,
+        type: sequelize_1.DataTypes.UUID,
+        defaultValue: sequelize_1.DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true,
     },
@@ -22,7 +23,7 @@ exports.Cart = index_1.sequelize.define("cart", {
         },
     },
     ingredients: {
-        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.INTEGER),
+        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
         allowNull: false,
     },
 }, {

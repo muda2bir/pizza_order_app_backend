@@ -72,3 +72,20 @@ router.get("/get_user", isUserAuthenticated, async (req, res) => {
     });
   }
 });
+
+router.post("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return res.json({
+        status: "error",
+        message: "Something went wrong!",
+        error: err,
+      });
+    }
+
+    return res.json({
+      status: "ok",
+      message: "User Successfully Logged Out!",
+    });
+  });
+});

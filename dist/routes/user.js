@@ -80,3 +80,18 @@ exports.router.get("/get_user", user_auth_1.default, (req, res) => __awaiter(voi
         });
     }
 }));
+exports.router.post("/logout", (req, res) => {
+    req.logout(function (err) {
+        if (err) {
+            return res.json({
+                status: "error",
+                message: "Something went wrong!",
+                error: err,
+            });
+        }
+        return res.json({
+            status: "ok",
+            message: "User Successfully Logged Out!",
+        });
+    });
+});
