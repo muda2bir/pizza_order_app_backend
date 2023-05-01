@@ -44,7 +44,7 @@ app.use(
     store: sessionStore,
     cookie: {
       secure: app.get("env") == "production",
-      sameSite: "none",
+      sameSite: false,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })
