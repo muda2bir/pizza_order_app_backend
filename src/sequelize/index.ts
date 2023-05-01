@@ -1,24 +1,9 @@
 import { Sequelize } from "sequelize";
 
-const DATABASE_NAME = process.env.DATABASE_NAME as string;
-const DATABASE_USERNAME = process.env.DATABASE_USERNAME as string;
-const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD;
+const DATABASE_URL = process.env.DATABASE_URL as string;
+const DATABASE_HOSTNAME = process.env.DATABASE_HOSTNAME as string;
 
-export const sequelize = new Sequelize(
-  DATABASE_NAME,
-  DATABASE_USERNAME,
-  DATABASE_PASSWORD,
-  {
-    host: "localhost",
-    dialect: "postgres",
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000,
-    },
-    define: {
-      freezeTableName: true,
-    },
-  }
-);
+export const sequelize = new Sequelize(DATABASE_URL, {
+  host: DATABASE_HOSTNAME,
+  dialect: "postgres",
+});

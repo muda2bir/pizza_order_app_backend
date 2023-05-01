@@ -1,16 +1,16 @@
 import express from "express";
 const app = express();
-if (app.get("env") !== "production") require("dotenv").config(); // * This is only going to import environment variables in the development
+require("dotenv").config(); // * This is going to import environment variables
 import passport from "passport";
 import cors from "cors";
 import { v4 as uuid } from "uuid";
 import session from "express-session";
 import "./strategies/local"; // * Local Authentication Strategy
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-import { db_connect } from "./utils/db_connect";
-db_connect(); // Checking database connection.
 import { sequelize } from "./sequelize";
 sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing all the tables with the database;
+import { db_connect } from "./utils/db_connect";
+db_connect(); // Checking database connection.
 // routes of the application
 import { router as userRoutes } from "./routes/user";
 import { router as ingredientsRouter } from "./routes/ingredients";
