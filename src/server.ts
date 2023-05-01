@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-require("dotenv").config(); // * This is going to import environment variables
+if (app.get("env") == "development") require("dotenv").config(); // * This is going to import environment variables
 import passport from "passport";
 import cors from "cors";
 import { v4 as uuid } from "uuid";
