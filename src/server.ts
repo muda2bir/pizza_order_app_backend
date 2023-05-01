@@ -42,9 +42,8 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
-    proxy: true,
     cookie: {
-      httpOnly: true,
+      secure: app.get("env") == "production",
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
