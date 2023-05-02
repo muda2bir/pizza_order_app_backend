@@ -5,8 +5,8 @@ export const Orders = sequelize.define(
   "orders",
   {
     order_id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
     },

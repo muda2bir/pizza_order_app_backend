@@ -8,9 +8,9 @@ import session from "express-session";
 import "./strategies/local"; // * Local Authentication Strategy
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 import { sequelize } from "./sequelize";
-sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing all the tables with the database;
 import { db_connect } from "./utils/db_connect";
 db_connect(); // Checking database connection.
+sequelize.sync({ alter: true }).catch((err) => console.error(err)); // * Syncing all the tables with the database;
 // routes of the application
 import { router as userRoutes } from "./routes/user";
 import { router as ingredientsRouter } from "./routes/ingredients";
@@ -43,8 +43,6 @@ app.use(
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
-      secure: true,
-      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })

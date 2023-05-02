@@ -5,8 +5,8 @@ export const Cart = sequelize.define(
   "cart",
   {
     cart_id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
     },

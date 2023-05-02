@@ -20,4 +20,5 @@ export const sequelize = new Sequelize(DATABASE_URL, {
     evict: 15000,
     acquire: 30000,
   },
+  logging: false,
 });
