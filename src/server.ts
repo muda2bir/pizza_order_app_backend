@@ -17,9 +17,7 @@ import { router as ingredientsRouter } from "./routes/ingredients";
 import { router as cartRouter } from "./routes/cart";
 import { router as orderRouter } from "./routes/order";
 
-console.log(app.get("env"));
-
-if (app.get("env") === "production") app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -46,7 +44,7 @@ app.use(
     store: sessionStore,
     cookie: {
       sameSite: "none",
-      secure: app.get("env") === "production" ? true : false,
+      secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })
