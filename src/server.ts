@@ -43,6 +43,8 @@ app.use(
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
+      sameSite: "none",
+      secure: app.get("env") !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })

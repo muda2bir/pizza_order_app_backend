@@ -37,7 +37,6 @@ router.get("/get_user_cart", isUserAuthenticated, async (req, res) => {
 router.post("/push_to_cart", isUserAuthenticated, async (req, res) => {
   try {
     const { pizza_name, customer_id, ingredients, total_price } = req.body;
-    console.log(req.body);
     if (!pizza_name || !customer_id || !ingredients || !total_price) {
       return res.json({
         status: "error",
