@@ -17,6 +17,8 @@ import { router as ingredientsRouter } from "./routes/ingredients";
 import { router as cartRouter } from "./routes/cart";
 import { router as orderRouter } from "./routes/order";
 
+console.log(app.get("env"));
+
 if (app.get("env") === "production") app.set("trust proxy", 1);
 app.use(
   cors({
