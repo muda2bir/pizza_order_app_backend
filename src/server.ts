@@ -43,6 +43,7 @@ app.use(
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
+      domain: process.env.COOKIE_DOMAIN,
       sameSite: "none",
       secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
